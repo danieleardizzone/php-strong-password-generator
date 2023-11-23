@@ -1,12 +1,16 @@
 <?php
 
-include __DIR__ . '/./functions.php';
+session_start();
 
 $min_characters = 8;
 $max_characters = 20;
 
-$password_length = intval($_GET['password_length']) ?? '';
+// $_SESSION["password_length"] = intval($_GET['password_length']) ?? '';
 // var_dump($password_length);
+
+$password_length = intval($_GET['password_length']) ?? '';
+
+$_SESSION["password_length"] = $password_length;
 
 ?>
 
@@ -27,8 +31,5 @@ $password_length = intval($_GET['password_length']) ?? '';
 
     <?php if($password_length === 0 || $password_length < $min_characters || $password_length > $max_characters) { ?>
         <p><strong>Inserisci un numero</strong> compreso tra <?php echo $min_characters ?> e <?php echo $max_characters ?></p>
-    <?php } elseif($password_length > 0) { ?>
-        <p><strong>Strong password: </strong><?php echo generate_password($password_length) ?></p>
-    <?php } ?>
-</body>
+    <?php } elseif($password_length > 0) { header('Location: ./password.php'); }?>
 </html>
