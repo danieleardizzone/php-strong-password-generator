@@ -1,18 +1,12 @@
 <?php
 
+include __DIR__ . '/./functions.php';
+
+$min_characters = 8;
+$max_characters = 20;
+
 $password_length = intval($_GET['password_length']) ?? '';
 // var_dump($password_length);
-
-function generate_password($length) {
-    $characters = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,./;'<>?:!@#$%^&*()-_=+";
-    $password = "";
-
-    for($x = 0; $x < $length; $x++) {
-        $password .= $characters[rand(0, strlen($characters) - 1)];
-    }
-
-    return $password;
-}
 
 ?>
 
@@ -31,8 +25,8 @@ function generate_password($length) {
         <input type="submit" value="Invia">
     </form>
 
-    <?php if($password_length === 0) { ?>
-        <p><strong>Inserisci un numero</strong></p>
+    <?php if($password_length === 0 || $password_length < $min_characters || $password_length > $max_characters) { ?>
+        <p><strong>Inserisci un numero</strong> compreso tra <?php echo $min_characters ?> e <?php echo $max_characters ?></p>
     <?php } elseif($password_length > 0) { ?>
         <p><strong>Strong password: </strong><?php echo generate_password($password_length) ?></p>
     <?php } ?>
