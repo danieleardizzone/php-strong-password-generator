@@ -1,11 +1,12 @@
 <?php
 
 session_start();
-var_dump($_SESSION);
+// var_dump($_SESSION);
 
 include __DIR__ . '/./functions.php';
 
-var_dump($_SESSION["password-length"]);
+// var_dump($_SESSION["password_length"]);
+$password_length = $_SESSION["password_length"];
 
 ?>
 
@@ -18,6 +19,6 @@ var_dump($_SESSION["password-length"]);
 </head>
 <body>
     <h2>La tua password è:</h2>
-    <h3><?php echo generate_password($_SESSION["password-length"]); ?></h3>
+    <p><?php echo generate_password($password_length); ?></p>
 </body>
 </html>
